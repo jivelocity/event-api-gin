@@ -12,7 +12,7 @@ type Event struct {
 	Description string    `binding:"required"`
 	Location    string    `binding:"required"`
 	DateTime    time.Time `binding:"required"`
-	UserID      int
+	UserID      int64
 }
 
 func (e *Event) Save() error {
@@ -77,7 +77,7 @@ func GetEventByID(id int64) (*Event, error) {
 	return &event, nil
 }
 
-func (e Event) Update() error {
+func (e *Event) Update() error {
 	query := `
 		UPDATE events
 		SET name = ?, description = ?, location = ?, dateTime = ?
